@@ -68,6 +68,29 @@ app.get('/books/:id',async (req,res)=>{
         res.status(500).send({message:error.message})
     }
 });
+//route for update a book
+app.put('/books/:id', async (req,res)=>{
+    try{
+        if(
+            !req.body.title ||
+            !req.body.author ||
+            !req.body.publishYear
+        ){
+            return res.status(400).send({
+                message: "send all required fields"
+            })
+        }
+        const {id} =req.params
+        const result = await Book.findByIdAndUpdate(id,req.body);
+        if (!result){
+            return res.status(404).json({message: 'message not found'});
+        };
+    }
+    catch(error){
+            console.log(error.message)
+            res.status(500).send({message:error.message})
+        }
+})
 }).catch((error)=>{
     console.log(error)
 })
