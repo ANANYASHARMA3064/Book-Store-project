@@ -69,21 +69,20 @@ const Home = () => {
                                 {book.publishYear }
                             </td>
                             <td className ="flex-justify-center gap-x-4">
-                                <link to={`/books/details/${book._id}`}>
-                                <BsInfoCircle className="text-2xl text-green-800">
+                                <Link to={`/books/details/${book._id}`}>
+                                <BsInfoCircle className="text-2xl text-green-800"/>
 
-                                </BsInfoCircle>
-                                </link>
-                                <link to={`/books/details/${book._id}`}>
+                                </Link>
+                                <Link to={`/books/details/${book._id}`}>
                                 <AiOutlineEdit className="text-2xl text-yellow-600">
 
                                 </AiOutlineEdit>
-                                </link>
-                                <link to={`/books/details/${book._id}`}>
+                                </Link>
+                                <Link to={`/books/details/${book._id}`}>
                                 <MdOutlineDelete className="text-2xl text-yellow-600">
 
                                 </MdOutlineDelete>
-                                </link>
+                                </Link>
                             </td>
 
 

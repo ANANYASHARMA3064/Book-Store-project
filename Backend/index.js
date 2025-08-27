@@ -2,7 +2,8 @@ import express from "express";
 import {PORT,mongoDBURL} from "./config.js"
 import mongoose from "mongoose";
 import { Book } from "./models/bookMode.js"
-import booksRoute from './Routes/booksRoutes.js '
+import booksRoute from './Routes/booksRoutes.js'
+import cors from "cors";
 const app =express(); 
 app.get('/',(req,res)=>{
     console.log(req)
@@ -17,7 +18,7 @@ app.use(cors())
 //  
 // Route for saving a new book 
 
-app.use('/books',booksRoute)
+app.use('/',booksRoute)
 mongoose.connect(mongoDBURL).then(()=>{
     console.log('app connected to database')
     app.listen(PORT,()=>{

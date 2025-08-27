@@ -1,6 +1,7 @@
 import express from 'express'
+import { Book } from '../models/bookMode.js';
 const router =express.Router();
-app.post('/books',async (request,response)=>{
+router.post('/books',async (request,response)=>{
     try{
         if(
             !request.body.title ||
@@ -28,23 +29,22 @@ n
 
 })
 // Route for get all books from database 
-app.get('/books',async (req,res)=>{
-    try{
-        const books =await Book.find({})
-        return res.status(200).json({
-            count: books.length,
-            data: books
-        })
-    return res.status(200).json(books);} 
-    catch(error){
-        console.log(error.message);
-        res.status(500).send({message:error.message})
-    }
+router.get('/books', async (req, res) => {
+  try {
+    const books = await Book.find({});
+    return res.status(200).json({
+      count: books.length,
+      data: books
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
 });
 
 
 //Route to get one book from database by ID 
-app.get('/books/:id',async (req,res)=>{
+router.get('/books/:id',async (req,res)=>{
     try{
         const {id}=req.params;
         const books =await Book.findById(id);
@@ -55,7 +55,7 @@ app.get('/books/:id',async (req,res)=>{
     }
 });
 //route for update a book
-app.put('/books/:id', async (req,res)=>{
+router.put('/books/:id', async (req,res)=>{
     try{
         if(
             !req.body.title ||
@@ -81,7 +81,7 @@ app.put('/books/:id', async (req,res)=>{
 })
 
 // Route for deleting a book 
-app.delete('/books/:id', async (req,res)=>{
+router.delete('/books/:id', async (req,res)=>{
     try{
         const {id}=req.params;
         const result = await Book.findByIdAndDelete(id);
@@ -94,3 +94,4 @@ app.delete('/books/:id', async (req,res)=>{
        res.status(500).send({error:error.message}); 
     }
     }); 
+export default router
