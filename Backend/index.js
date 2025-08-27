@@ -14,12 +14,7 @@ app.use(express.json());
 //option-1:allow all domains
 app.use(cors())
 //option-2 :Allow custom 
-app.use(CORS({
-    origin:'https://localhost:4090',
-    methods:['GET','POST','DELETE','PUT'],
-    allowedHeaders:['Content-Type']
-
-}))
+//  
 // Route for saving a new book 
 
 app.use('/books',booksRoute)
