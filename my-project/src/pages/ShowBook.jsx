@@ -9,13 +9,13 @@ const ShowBooks = () => {
   const {id}=useParams();
   useEffect(()=>{
     setLoading(true)
-    axios.get(`http://localhost:8090/books/:${id}`)
+    axios.get(`http://localhost:8090/books/${id}`)
     .then((response)=>{
       setBook(response.data);
       setLoading(false)
     })
 
-  })
+  },[id])
   return (
     <div className='p-4'>
       <BackButton/>
