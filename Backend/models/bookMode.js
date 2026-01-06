@@ -12,7 +12,29 @@ const bookSchema = mongoose.Schema(
          publishYear:{
             type:String,
             required:true
-        }
+        },
+        price:{
+            type:Int16Array,
+            required:false
+        },
+        genre:{
+            type:String,
+            required:true,
+        },
+        tags:{
+            type:String,
+            required:false,
+        },
+        description:{
+            type:String,
+            required:false,
+
+        },
+        quantity:{
+            type:Int32Array,
+            required:false,
+        },
+        
     }
    
     
