@@ -6,7 +6,11 @@ router.post('/books',async (request,response)=>{
         if(
             !request.body.title ||
             !request.body.author ||
-            !request.body.publishYear
+            !request.body.publishYear||
+            !request.body.genre
+            
+
+
         ){
             return response.status(400).send({
                 message: "send all required fields"
@@ -15,7 +19,8 @@ router.post('/books',async (request,response)=>{
         const newBook={
         title:request.body.title,
         author:request.body.author,
-        publishYear:request.body.publishYear
+        publishYear:request.body.publishYear,
+        genre:request.body.genre
     }
     const book =await Book.create(newBook)
     return response.status(201).send(book)
@@ -25,7 +30,7 @@ router.post('/books',async (request,response)=>{
         response.status(500).send({message:error.message})
     }
     
-n
+
 
 })
 // Route for get all books from database 
@@ -55,30 +60,30 @@ router.get('/books/:id',async (req,res)=>{
     }
 });
 //route for update a book
-router.put('/books/:id', async (req,res)=>{
-    try{
-        if(
-            !req.body.title ||
-            !req.body.author ||
-            !req.body.publishYear
-        ){
-            return res.status(400).send({
-                message: "send all required fields"
-            })
-        }
-        const {id} =req.params
-        const result = await Book.findByIdAndUpdate(id,req.body);
-        if (!result){
-            return res.status(404).json({message: 'message not found'});
-        };
-        return res.status(200).json({message:'successfully updated'})
+router.put('/books/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid book ID" });
     }
-    
-    catch(error){
-            console.log(error.message)
-            res.status(500).send({message:error.message})
-        }
-})
+
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "No fields to update" });
+    }
+
+    const result = await Book.findByIdAndUpdate(id, req.body, { new: true });
+
+    if (!result) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Route for deleting a book 
 router.delete('/books/:id', async (req,res)=>{
