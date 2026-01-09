@@ -85,7 +85,7 @@ router.put('/books/:id', async (req, res) => {
   }
 });
 
-// Route for deleting a book 
+
 router.delete('/books/:id', async (req,res)=>{
     try{
         const {id}=req.params;
