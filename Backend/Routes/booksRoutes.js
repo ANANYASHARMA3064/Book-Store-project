@@ -98,5 +98,26 @@ router.delete('/books/:id', async (req,res)=>{
        console.log(error.message);
        res.status(500).send({error:error.message}); 
     }
-    }); 
+    });
+router.get("/books/search", async (req, res) => {
+  try {
+    const { title } = req.query;
+
+    if (!title) {
+      return res.status(400).json({ message: "Title query is required" });
+    }
+
+    const books = await Book.find({
+      title: { $regex: title, $options: "i" } // case-insensitive
+    });
+
+    res.status(200).json({
+      count: books.length,
+      data: books
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
+  }
+});
 export default router
