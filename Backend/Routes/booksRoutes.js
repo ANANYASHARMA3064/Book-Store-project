@@ -13,7 +13,7 @@ router.post('/books',async (request,response)=>{
 
         ){
             return response.status(400).send({
-                message: "send all required fields"
+                message: "send all required field(s)"
             })
         }
         const newBook={
