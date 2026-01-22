@@ -33,6 +33,27 @@ router.post('/books',async (request,response)=>{
 
 
 })
+router.get('/books/search', async (req, res) => {
+  try {
+    const { title } = req.query;
+
+    if (!title) {
+      return res.status(400).json({ message: "Title query is required" });
+    }
+
+    const books = await Book.find({
+      title: { $regex: title, $options: "i" }
+    });
+
+    res.status(200).json({
+      count: books.length,
+      data: books
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Route for get all books from database 
 router.get('/books', async (req, res) => {
   try {
@@ -120,4 +141,5 @@ router.get("/books/search", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 export default router
