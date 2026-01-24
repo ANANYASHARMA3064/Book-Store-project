@@ -91,7 +91,7 @@ router.put('/books/:id', async (req, res) => {
     }
 
     if (Object.keys(req.body).length === 0) {
-      return res.status(400).json({ message: "No fields to update" });
+      return res.status(400).json({ message: "No field(s) to update" });
     }
 
     const result = await Book.findByIdAndUpdate(id, req.body, { new: true });
