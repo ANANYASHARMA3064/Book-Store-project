@@ -3,7 +3,7 @@ import axios from "axios";
 import Spinner from "../Components/Spinner";
 import BooksCard from "../Components/Home/BooksCard";
 import BooksTable from "../Components/Home/BooksTable";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/NavBar";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
