@@ -11,7 +11,7 @@ const Navbar = ({ onSearch }) => {
 
   return (
     <nav className="w-full bg-sky-600 p-4 flex items-center justify-between">
-      <h1 className="text-white text-xl font-bold">📚 BookStore</h1>
+      <h1 className="text-white text-xl font-bold">BookStore</h1>
 
       <input
         type="text"
