@@ -7,7 +7,7 @@ books = [
     {"title": "The Hobbit", "genre": "fantasy"},
     {"title": "Atomic Habits", "genre": "self-help"},
     {"title": "Deep Work", "genre": "self-help"},
-    {"title": "Clean Code", "genre": "programming"},
+    {"title": "Clean Code2", "genre": "programming"},
     {"title": "The Pragmatic Programmer", "genre": "programming"},
 ]
 
