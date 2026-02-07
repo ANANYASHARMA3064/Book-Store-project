@@ -4,7 +4,7 @@ import torch
 books = [
     {"title": "Harry Potter", "genre": "fantasy"},
     {"title": "Lord of the Rings", "genre": "fantasy"},
-    {"title": "The Hobbit", "genre": "fantasy"},
+    {"title": "The Hobbit ", "genre": "fantasy"},
     {"title": "Atomic Habits", "genre": "self-help"},
     {"title": "Deep Work", "genre": "self-help"},
     {"title": "Clean Code4", "genre": "programming"},
