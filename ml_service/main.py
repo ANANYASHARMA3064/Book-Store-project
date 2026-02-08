@@ -2,7 +2,7 @@ import torch
 
 # Fake book dataset
 books = [
-    {"title": "Harry Potter", "genre": "fantasy"},
+    {"title": "Harry Potter", "gejjnre": "fantasy"},
     {"title": "Lord of the Rings", "genre": "fantasy"},
     {"title": "The Hobbit ", "genre": "fantasy"},
     {"title": "Atomic Habits", "genre": "self-help"},
