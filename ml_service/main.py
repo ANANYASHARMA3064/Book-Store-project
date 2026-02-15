@@ -8,7 +8,7 @@ books = [
     {"title": "Atomic Habits", "genre": "self-help"},
     {"title": "Deep Work", "genre": "self-help"},
     {"title": "Clean Code4", "genre": "programming"},
-    {"title": "The Pragmatic Pnnrogrammer", "genre": "programming"},
+    {"title": "The Pragmatic Pnnnnnnrogrammer", "genre": "programming"},
 ]
 
 print("Dataset loaded:", len(books))
