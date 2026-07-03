@@ -4,12 +4,15 @@ import Spinner from "../Components/Spinner";
 import BooksCard from "../Components/Home/BooksCard";
 import BooksTable from "../Components/Home/BooksTable";
 import Navbar from "../Components/NavBar";
+import AuthModal from "../Components/authModel";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("table");
+  const [showAuth, setShowAuth] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -28,20 +31,22 @@ const Home = () => {
 
   const handleSearch = (query) => {
     const lower = query.toLowerCase();
-
     const filtered = books.filter((book) =>
       book.title.toLowerCase().includes(lower) ||
       book.author.toLowerCase().includes(lower) ||
       book.genre.toLowerCase().includes(lower)
     );
-
     setFilteredBooks(filtered);
   };
 
   return (
     <>
-      <Navbar onSearch={handleSearch} />
-
+      <Navbar
+        onSearch={handleSearch}
+        onSignIn={() => setShowAuth(true)}
+        user={user}
+        onLogout={() => setUser(null)}
+      />
       <div className="p-4">
         <div className="flex justify-center items-center gap-x-4 mb-4">
           <button
@@ -50,7 +55,6 @@ const Home = () => {
           >
             Table
           </button>
-
           <button
             className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
             onClick={() => setShowType("card")}
@@ -65,6 +69,13 @@ const Home = () => {
           <BooksTable books={filteredBooks} />
         ) : (
           <BooksCard books={filteredBooks} />
+        )}
+
+        {showAuth && (
+          <AuthModal
+            onClose={() => setShowAuth(false)}
+            onSuccess={(data) => { setUser(data); setShowAuth(false); }}
+          />
         )}
       </div>
     </>
