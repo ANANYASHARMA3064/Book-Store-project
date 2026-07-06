@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { TbCompass } from 'react-icons/tb';
 import { login, register, saveToken } from '../Services/authService';
 
 const AuthModal = ({ onClose, onSuccess }) => {
-  const [mode, setMode] = useState('login'); // 'login' | 'register'
+  const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -26,62 +27,95 @@ const AuthModal = ({ onClose, onSuccess }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/70 z-50 flex justify-center items-center p-4"
-      onClick={onClose}
+      className="fixed inset-0 z-50 flex justify-center items-center pointer-events-none"
     >
       <div
-        onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-sm bg-panel border border-border rounded-xl p-6 relative"
+        className="pointer-events-auto w-full max-w-sm mx-4 p-8 rounded-2xl relative"
+        style={{
+          background: '#0f0f1a',
+          border: '0.5px solid #2d2d5e',
+          boxShadow: '0 0 0 1px #3b3b6b, 0 24px 48px rgba(124,58,237,0.15)',
+        }}
       >
         <AiOutlineClose
-          className="absolute right-5 top-5 text-muted hover:text-text cursor-pointer"
           onClick={onClose}
+          className="absolute right-4 top-4 cursor-pointer text-lg"
+          style={{ color: '#4b5580' }}
         />
 
-        <h2 className="font-mono text-lg text-text mb-1">
-          {mode === 'login' ? 'Sign in' : 'Create account'}
-        </h2>
-        <p className="text-xs text-muted font-mono mb-6">
+        {/* Logo */}
+        <div className="flex items-center gap-2 mb-6">
+          <div className="w-6 h-6 rounded-md flex items-center justify-center"
+            style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}>
+            <TbCompass className="text-white text-xs" />
+          </div>
+          <span className="font-mono text-sm font-medium" style={{ color: '#e2e8f0' }}>
+            opensource<span style={{ color: '#818cf8' }}>compass</span>
+          </span>
+        </div>
+
+        {/* Heading */}
+        <p className="font-mono text-lg font-medium" style={{ color: '#e2e8f0' }}>
+          {mode === 'login' ? 'sign in' : 'create account'}
+        </p>
+        <p className="font-mono text-xs mt-1 mb-6" style={{ color: '#4b5580' }}>
           {mode === 'login' ? '$ auth --login' : '$ auth --register'}
         </p>
 
+        {/* Inputs */}
         <div className="flex flex-col gap-3">
           <input
             type="email"
-            placeholder="Email"
+            placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-ink border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-muted outline-none focus:border-add font-mono"
+            className="w-full h-10 px-4 rounded-lg font-mono text-sm outline-none"
+            style={{
+              background: '#1a1a2e',
+              border: '0.5px solid #2d2d5e',
+              color: '#e2e8f0',
+            }}
+            onFocus={e => e.target.style.borderColor = '#7c3aed'}
+            onBlur={e => e.target.style.borderColor = '#2d2d5e'}
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-            className="bg-ink border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-muted outline-none focus:border-add font-mono"
+            className="w-full h-10 px-4 rounded-lg font-mono text-sm outline-none"
+            style={{
+              background: '#1a1a2e',
+              border: '0.5px solid #2d2d5e',
+              color: '#e2e8f0',
+            }}
+            onFocus={e => e.target.style.borderColor = '#7c3aed'}
+            onBlur={e => e.target.style.borderColor = '#2d2d5e'}
           />
         </div>
 
         {error && (
-          <p className="text-xs text-red-400 font-mono mt-3">{error}</p>
+          <p className="font-mono text-xs mt-3" style={{ color: '#f87171' }}>{error}</p>
         )}
 
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="mt-4 w-full py-2.5 bg-add text-ink font-mono text-sm rounded-lg hover:bg-add-dim transition-colors disabled:opacity-50"
+          className="mt-4 w-full h-10 rounded-lg font-mono text-sm font-medium text-white disabled:opacity-50"
+          style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)', border: 'none' }}
         >
           {loading ? 'loading...' : mode === 'login' ? 'sign in' : 'register'}
         </button>
 
-        <p className="text-xs text-muted font-mono text-center mt-4">
-          {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
+        <p className="font-mono text-xs text-center mt-4" style={{ color: '#4b5580' }}>
+          {mode === 'login' ? "no account? " : "have an account? "}
           <button
             onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError(''); }}
-            className="text-add hover:underline"
+            style={{ color: '#818cf8', background: 'none', border: 'none', cursor: 'pointer' }}
+            className="font-mono text-xs"
           >
-            {mode === 'login' ? 'Register' : 'Sign in'}
+            {mode === 'login' ? 'register' : 'sign in'}
           </button>
         </p>
       </div>
