@@ -40,26 +40,44 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div style={{ background: '#0a0a14', minHeight: '100vh' }}>
       <Navbar
         onSearch={handleSearch}
         onSignIn={() => setShowAuth(true)}
         user={user}
         onLogout={() => setUser(null)}
       />
+
       <div className="p-4">
-        <div className="flex justify-center items-center gap-x-4 mb-4">
+        {/* View toggle */}
+        <div className="flex justify-center items-center gap-x-3 my-6">
           <button
-            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
             onClick={() => setShowType("table")}
+            style={{
+              background: showType === 'table'
+                ? 'linear-gradient(135deg, #7c3aed, #3b82f6)'
+                : 'transparent',
+              border: '0.5px solid',
+              borderColor: showType === 'table' ? 'transparent' : '#2d2d5e',
+              color: showType === 'table' ? '#fff' : '#94a3b8',
+            }}
+            className="px-5 py-1.5 rounded-lg font-mono text-sm transition-all"
           >
-            Table
+            table
           </button>
           <button
-            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
             onClick={() => setShowType("card")}
+            style={{
+              background: showType === 'card'
+                ? 'linear-gradient(135deg, #7c3aed, #3b82f6)'
+                : 'transparent',
+              border: '0.5px solid',
+              borderColor: showType === 'card' ? 'transparent' : '#2d2d5e',
+              color: showType === 'card' ? '#fff' : '#94a3b8',
+            }}
+            className="px-5 py-1.5 rounded-lg font-mono text-sm transition-all"
           >
-            Card
+            card
           </button>
         </div>
 
@@ -70,15 +88,15 @@ const Home = () => {
         ) : (
           <BooksCard books={filteredBooks} />
         )}
-
-        {showAuth && (
-          <AuthModal
-            onClose={() => setShowAuth(false)}
-            onSuccess={(data) => { setUser(data); setShowAuth(false); }}
-          />
-        )}
       </div>
-    </>
+
+      {showAuth && (
+        <AuthModal
+          onClose={() => setShowAuth(false)}
+          onSuccess={(data) => { setUser(data); setShowAuth(false); }}
+        />
+      )}
+    </div>
   );
 };
 
